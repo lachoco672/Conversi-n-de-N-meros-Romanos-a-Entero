@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversión de Romanos a Enteros</title>
+    <style>
+        /* Estilos básicos para la página */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #3b477e;
+            
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
+            width: 200px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Conversión de Números Romanos a Enteros</h1>
+
+    <!-- Formulario de entrada -->
+    <label for="romanInput">Introduce un número romano (ejemplo: XIV):</label>
+    <input type="text" id="romanInput" placeholder="Ejemplo: XIV" />
+    <button onclick="convertir()">Convertir</button>
+
+    <!-- Mostrar el resultado -->
+    <p id="resultado"></p>
+
+    <script>
+        // Diccionario de valores romanos
+        const romanValues = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000
+        };
+
+        // Función para convertir un número romano a entero
+        function convertir() {
+            const romano = document.getElementById('romanInput').value.toUpperCase(); // Convertir la entrada a mayúsculas
+            let total = 0;
+
+            // Recorrer la cadena del número romano
+            for (let i = 0; i < romano.length; i++) {
+                // Si el valor del símbolo actual es menor que el del siguiente, restamos
+                // Ejemplo: en "IX" (9) I es menor que X, por lo que restamos 1 de 10
+                if (romanValues[romano[i]] < romanValues[romano[i + 1]]) {
+                    total -= romanValues[romano[i]];
+                } else {
+                    // En caso contrario, sumamos el valor del símbolo romano
+                    total += romanValues[romano[i]];
+                }
+            }
+
+            // Mostrar el resultado
+            document.getElementById('resultado').innerText = `El número entero es: ${total}`;
+        }
+    </script>
+
+</body>
+</html>
